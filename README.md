@@ -64,3 +64,29 @@ mkdir ${HOME}/project
 ./run.sh -v ${HOME}/project:${HOME}/project dustynv/l4t-ml:r32.7.1
 ```
 Choose to use version r32.7.1 since I'm using Jetpack 4.6
+#### Setup custom YOLOv4-tiny TensorRT on Jetson Nano
+In l4t-ml container environment, setup YOLOv4-tiny TensorRT.
+**Note**: fiores is my user in Jetson Nano
+```
+cd /home/fiores/project
+git clone https://github.com/jkjung-avt/tensorrt_demos.git
+cd tensorrt_demos
+```
+Install a "yolo_layer" plugin to speed up inference time of the yolov3/yolov4 models.
+```
+cd /home/fiores/project/tensorrt_demos/plugins
+make
+```
+Download the pre-trained customed YOLOv4-tiny weights, and config file. Rename these 2 files as same name (Ex yolov4-tiny-custom.weights, yolov4-tiny-custom.cfg) Then convert to ONNX and then TensorRT
+```
+cd /home/fiores/project/tensorrt_demos/yolo
+python3 yolo_to_onnx.py -m yolov4-tiny-custom
+python3 onnx_to_tensorrt.py -m yolov4-tiny-custom
+```
+For additional python package that required by application. Install by pip3 command
+Test the TensortRT yolov4-tiny engine with image
+```
+cd /home/fiores/project/tensorrt_demos/
+python3 trt_yolo.py --image yolo/vehicle1.jpg \
+                      -m yolov4-tiny-custom
+```
