@@ -83,7 +83,10 @@ cd /home/fiores/project/tensorrt_demos/yolo
 python3 yolo_to_onnx.py -m yolov4-tiny-custom
 python3 onnx_to_tensorrt.py -m yolov4-tiny-custom
 ```
-For additional python package that required by application. Install by pip3 command
+For additional python package that required by application. Install by pip3 command: 
+```
+pip3 install matplotlib
+```
 Test the TensortRT yolov4-tiny engine with image
 ```
 cd /home/fiores/project/tensorrt_demos/
