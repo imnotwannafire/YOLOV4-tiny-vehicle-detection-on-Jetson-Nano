@@ -87,9 +87,9 @@ For additional python package that required by application. Install by pip3 comm
 ```
 pip3 install matplotlib
 ```
-Test the TensortRT yolov4-tiny engine with image
+Test the TensortRT yolov4-tiny engine with image. “-c” is for category_num (class)
 ```
 cd /home/fiores/project/tensorrt_demos/
 python3 trt_yolo.py --image yolo/vehicle1.jpg \
-                      -m yolov4-tiny-custom
+                      -m yolov4-tiny-custom -c 4
 ```
